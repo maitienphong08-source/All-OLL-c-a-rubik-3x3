@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10151d">
+<meta name="description" content="Thư viện luyện đủ 57 trường hợp OLL Rubik 3x3 với mô hình 3D nhẹ, thuật toán và chế độ luyện tập offline.">
+<title>OLL 57 — Rubik 3×3 Trainer</title>
+<style>
+:root{color-scheme:dark;--bg:#0d1219;--panel:#151d27;--panel2:#1b2633;--line:#293747;--text:#edf3f8;--muted:#9babbc;--accent:#72d6bf;--accent2:#8bb7ff;--good:#75d6a3;--warn:#f1c56c;--shadow:0 14px 36px rgba(0,0,0,.22);--radius:17px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 15% -10%,#203344 0,transparent 35%),var(--bg);color:var(--text);font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent2);outline-offset:2px}.app{max-width:1480px;margin:auto;padding:24px 22px 36px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:22px}.brand{display:flex;align-items:center;gap:13px}.logo{width:46px;height:46px;border-radius:14px;background:linear-gradient(140deg,#78e0c5,#5f94dd);display:grid;place-items:center;color:#0b1720;font-weight:900;font-size:17px;box-shadow:0 8px 22px #62bdaa30}.brand h1{margin:0;font-size:21px;letter-spacing:.2px}.brand p{margin:2px 0 0;color:var(--muted);font-size:12px}.topstats{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.stat-chip{padding:8px 12px;background:#17222e;border:1px solid var(--line);border-radius:12px;color:var(--muted);font-size:12px}.stat-chip strong{color:var(--text);font-size:14px;margin-right:4px}.layout{display:grid;grid-template-columns:360px minmax(0,1fr);gap:18px;align-items:start}.panel{background:linear-gradient(180deg,#18222e,#141c26);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}.library{padding:16px;position:sticky;top:12px;max-height:calc(100vh - 24px);display:flex;flex-direction:column}.library-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.library-head h2,.section-title{margin:0;font-size:15px}.count{color:var(--muted);font-size:12px}.search{width:100%;padding:11px 12px;border:1px solid var(--line);background:#0e151e;color:var(--text);border-radius:11px;margin-bottom:9px}.filters{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}.filters select{min-width:0;width:100%;padding:9px 10px;background:#0e151e;color:var(--text);border:1px solid var(--line);border-radius:10px}.status-tabs{display:flex;gap:6px;margin:0 0 12px}.tab{flex:1;padding:8px 6px;border-radius:9px;border:1px solid transparent;background:transparent;color:var(--muted);font-size:12px}.tab.active{background:#263b48;border-color:#3b5b65;color:#dffaf2}.case-list{overflow:auto;min-height:180px;padding-right:3px;display:grid;grid-template-columns:1fr 1fr;gap:7px;scrollbar-width:thin;scrollbar-color:#3b4d5e transparent}.case-card{display:flex;align-items:center;gap:8px;text-align:left;padding:9px 8px;min-width:0;border:1px solid #293747;background:#121a24;border-radius:11px;color:var(--text);transition:border-color .15s,background .15s}.case-card:hover{border-color:#557786;background:#192735}.case-card.active{border-color:var(--accent);background:#1a3436;box-shadow:inset 0 0 0 1px #72d6bf30}.case-num{width:31px;height:31px;flex:0 0 31px;border-radius:9px;background:#263646;display:grid;place-items:center;font-size:12px;font-weight:800;color:#cfe4f2}.case-card.active .case-num{background:var(--accent);color:#10201e}.case-meta{min-width:0}.case-meta b{display:block;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.case-meta small{display:block;color:var(--muted);font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.learn-dot{margin-left:auto;width:7px;height:7px;border-radius:50%;background:#3b4a58;flex:0 0 7px}.learn-dot.done{background:var(--good);box-shadow:0 0 9px #75d6a366}.empty{grid-column:1/-1;text-align:center;padding:30px 10px;color:var(--muted)}.main{display:grid;gap:18px}.hero{padding:19px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px}.eyebrow{color:var(--accent);font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase}.hero h2{font-size:23px;line-height:1.2;margin:4px 0 5px}.hero p{margin:0;color:var(--muted);font-size:13px}.hero-actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:#202c39;color:var(--text);padding:9px 12px;border-radius:10px;font-size:12px;font-weight:700;transition:transform .12s,background .12s,border-color .12s}.btn:hover{background:#2a3b4b;border-color:#536e80}.btn:active{transform:translateY(1px)}.btn.primary{background:var(--accent);color:#0a1d1a;border-color:var(--accent)}.btn.primary:hover{background:#8ce8d1}.btn.good{background:#1d3d34;border-color:#32624e;color:#a8f0c9}.btn:disabled{opacity:.4;cursor:not-allowed}.workspace{display:grid;grid-template-columns:minmax(300px,.95fr) minmax(300px,1.05fr);gap:16px}.cube-panel,.algo-panel{padding:17px}.panel-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.panel-top h3{margin:0;font-size:14px}.hint{color:var(--muted);font-size:11px}.cube-stage{height:430px;display:grid;place-items:center;position:relative;overflow:hidden;border-radius:13px;background:radial-gradient(ellipse at 50% 58%,#273747 0, #18232f 43%,#121a24 78%)}.cube-stage:after{content:"";position:absolute;width:190px;height:22px;bottom:25px;background:#0006;filter:blur(17px);border-radius:50%}.cube-panel.viewer-expanded{position:fixed;inset:14px;z-index:1000;display:flex;flex-direction:column;padding:20px;background:#111a24;box-shadow:0 20px 80px #000c}.viewer-expanded .cube-stage{flex:1;min-height:260px;height:auto}.viewer-expanded .cube-wrap{flex:0 0 auto}.viewer-expanded .cube-caption{margin-top:10px}.viewer-expanded .drag-tip{margin-top:10px}body.viewer-open{overflow:hidden}.viewer-expanded .panel-top{margin-bottom:10px}.cube-wrap{width:270px;height:270px;perspective:1500px;position:relative;z-index:1;touch-action:pan-y;cursor:grab}.cube-wrap:active{cursor:grabbing}.cube-scene{width:216px;height:216px;position:absolute;left:27px;top:27px;transform-style:preserve-3d;will-change:transform;transform:rotateX(-27deg) rotateY(-35deg);transition:transform .62s cubic-bezier(.2,.75,.2,1)}.cube-layers{position:absolute;inset:0;transform-style:preserve-3d}.cube-layer{position:absolute;inset:0;transform-style:preserve-3d;transform-origin:50% 50%;will-change:transform}.cube-layer.turning{will-change:transform}.cubie{position:absolute;left:74px;top:74px;width:68px;height:68px;transform-style:preserve-3d}.cubie-face{position:absolute;left:0;top:0;width:68px;height:68px;padding:4px;display:grid;place-items:center;background:#080d13;border:1px solid #02060a;border-radius:5px;backface-visibility:hidden}.cubie-face.front{transform:translateZ(34px)}.cubie-face.back{transform:rotateY(180deg) translateZ(34px)}.cubie-face.right{transform:rotateY(90deg) translateZ(34px)}.cubie-face.left{transform:rotateY(-90deg) translateZ(34px)}.cubie-face.top{transform:rotateX(90deg) translateZ(34px)}.cubie-face.bottom{transform:rotateX(-90deg) translateZ(34px)}.sticker{display:block;width:100%;height:100%;border-radius:4px;border:1px solid #0005;box-shadow:inset 0 1px 0 #ffffff25,0 1px 2px #0006}.yellow{background:#ffd83d}.white{background:#edf1f4}.green{background:#159c63}.blue{background:#286dd5}.red{background:#e5484d}.orange{background:#ff8c36}.black{background:linear-gradient(145deg,#26313c,#111820)}.view-tools{display:flex;align-items:center;justify-content:center;gap:7px;flex-wrap:wrap;margin-top:12px}.view-tools .btn{padding:7px 10px;font-size:11px}.drag-tip{text-align:center;color:var(--muted);font-size:10px;margin-top:8px}.cube-caption{display:flex;justify-content:space-between;color:var(--muted);font-size:11px;margin-top:9px}.top-pattern{display:grid;grid-template-columns:repeat(3,22px);grid-template-rows:repeat(3,22px);gap:3px}.top-pattern span{border-radius:4px;background:#354252;border:1px solid #526477}.top-pattern span.y{background:#ffd83d;border-color:#e6bd2e}.alg-label{font-size:11px;color:var(--muted);margin:0 0 6px}.algorithm{font-size:17px;line-height:1.9;letter-spacing:.45px;font-weight:750;color:#f4f8fb;overflow-wrap:anywhere;min-height:64px}.move-chip{display:inline-block;padding:1px 5px;margin:0 2px;border-radius:6px;background:#263544;color:#d5e3ec;cursor:pointer;transition:background .12s,color .12s}.move-chip:hover{background:#365064}.move-chip.current{background:var(--accent);color:#10201c;box-shadow:0 0 0 2px #72d6bf2b}.alg-actions{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0 15px}.progress-track{height:6px;background:#2a3643;border-radius:99px;overflow:hidden;margin:7px 0}.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),#8bb7ff);border-radius:99px;transition:width .18s}.step-info{display:flex;justify-content:space-between;gap:8px;color:var(--muted);font-size:11px}.player-controls{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.speed-row{display:flex;align-items:center;gap:9px;margin-top:13px;color:var(--muted);font-size:11px}.speed-row input{width:100%;accent-color:var(--accent)}.subsections{display:grid;grid-template-columns:1fr 1fr;gap:16px}.subpanel{padding:16px}.subpanel h3{font-size:13px;margin:0 0 10px}.notation-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.notation{padding:8px;border:1px solid var(--line);background:#111a24;border-radius:9px}.notation b{color:var(--accent);font-size:13px;display:block}.notation span{font-size:10px;color:var(--muted)}.recognition{color:#c4d0db;font-size:12px;margin:0}.recognition strong{color:#f0f5f8}.footnote{font-size:10px;color:#8294a6;margin-top:14px}.footer{margin-top:20px;text-align:center;color:#718294;font-size:10px}.footer a{color:#9bc9df;text-decoration:none}.footer a:hover{text-decoration:underline}.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#e8fff6;color:#10211c;border-radius:11px;padding:10px 15px;font-size:12px;font-weight:700;box-shadow:var(--shadow);transition:.2s;z-index:30}.toast.show{opacity:1;transform:translate(-50%,0)}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:1050px){.layout{grid-template-columns:320px minmax(0,1fr)}.workspace{grid-template-columns:1fr}.cube-stage{height:400px}.subsections{grid-template-columns:1fr}}
+@media(max-width:760px){.app{padding:15px 11px 26px}.topbar{align-items:flex-start;flex-direction:column}.topstats{justify-content:flex-start}.layout{grid-template-columns:1fr}.library{position:static;max-height:none}.case-list{max-height:330px;min-height:120px}.hero{align-items:flex-start;flex-direction:column}.hero h2{font-size:20px}.workspace{grid-template-columns:1fr}.cube-stage{height:340px}.subsections{grid-template-columns:1fr}.brand h1{font-size:19px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><div class="logo">OLL</div><div><h1>OLL 57 · RUBIK 3×3</h1><p>Thư viện công thức và phòng luyện nhận diện tầng cuối</p></div></div>
+    <div class="topstats"><div class="stat-chip"><strong id="learnedCount">0</strong>/57 đã thuộc</div><div class="stat-chip"><strong>57</strong> trường hợp OLL</div><div class="stat-chip"><strong>Offline</strong> không cần mạng</div></div>
+  </header>
+  <div class="layout">
+    <aside class="panel library">
+      <div class="library-head"><h2>Thư viện OLL</h2><span class="count" id="resultCount">57 trường hợp</span></div>
+      <label class="sr-only" for="searchInput">Tìm trường hợp OLL</label><input id="searchInput" class="search" type="search" placeholder="Tìm số, tên, nhóm hoặc công thức…" autocomplete="off">
+      <div class="filters"><select id="groupFilter" aria-label="Lọc theo nhóm"><option value="all">Tất cả nhóm</option></select><select id="sortFilter" aria-label="Sắp xếp"><option value="number">Số OLL tăng dần</option><option value="reverse">Số OLL giảm dần</option><option value="name">Tên A → Z</option></select></div>
+      <div class="status-tabs" role="group" aria-label="Lọc trạng thái"><button class="tab active" data-status="all">Tất cả</button><button class="tab" data-status="unlearned">Chưa thuộc</button><button class="tab" data-status="learned">Đã thuộc</button></div>
+      <div class="case-list" id="caseList" aria-label="Danh sách 57 trường hợp OLL"></div>
+    </aside>
+    <main class="main">
+      <section class="panel hero">
+        <div><div class="eyebrow" id="caseGroup">DOT · NHÓM CHẤM</div><h2 id="caseTitle">OLL 1 — Runway</h2><p id="caseDescription">Nhìn mẫu vàng ở tầng trên, căn hướng theo khối 3D rồi thực hiện công thức.</p></div>
+        <div class="hero-actions"><button class="btn" id="randomBtn">Chọn ngẫu nhiên</button><button class="btn good" id="learnBtn">✓ Đánh dấu đã thuộc</button></div>
+      </section>
+      <section class="workspace">
+        <div class="panel cube-panel">
+          <div class="panel-top"><h3>Mô hình Rubik 3D</h3><span class="hint">Kéo để xoay góc nhìn</span></div>
+          <div class="cube-stage" id="cubeStage">
+            <div class="cube-wrap" id="cubeWrap" aria-label="Mô hình Rubik 3D, kéo để xoay và cuộn con lăn để phóng to hoặc thu nhỏ" title="Kéo để xoay · Cuộn con lăn để tiến/lùi camera">
+              <div class="cube-scene" id="cubeScene"><div class="cube-layers" id="cubeLayers"></div></div>
+            </div>
+          </div>
+          <div class="view-tools"><button class="btn" id="topViewBtn">Nhìn từ trên</button><button class="btn" id="defaultViewBtn">Góc mặc định</button><button class="btn" id="rotateViewBtn">Xoay 45°</button><button class="btn primary" id="expandViewBtn" aria-pressed="false">⛶ Mở rộng khung nhìn</button></div>
+          <div class="drag-tip">Kéo để xoay góc nhìn · Cuộn con lăn để tiến/lùi camera · Khi phát công thức, từng tầng Rubik sẽ xoay độc lập trong không gian 3D.</div>
+          <div class="cube-caption"><span id="cubeStateLabel">Trạng thái: chưa thực hiện</span><span>Mô hình cục bộ · không tải thư viện</span></div>
+        </div>
+        <div class="panel algo-panel">
+          <div class="panel-top"><h3>Thuật toán OLL</h3><span class="hint" id="moveCount">11 bước</span></div>
+          <p class="alg-label">Công thức (chọn một ký hiệu để nhảy đến bước đó)</p>
+          <div class="algorithm" id="algorithm"></div>
+          <div class="alg-actions"><button class="btn primary" id="copyBtn">Sao chép công thức</button><button class="btn" id="resetBtn">Đặt lại mô hình</button></div>
+          <div class="step-info"><span id="stepLabel">Bước 0 / 11</span><span id="stepPercent">0%</span></div><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+          <div class="player-controls"><button class="btn" id="prevBtn">← Lùi</button><button class="btn primary" id="playBtn">▶ Phát công thức</button><button class="btn" id="nextBtn">Tiếp →</button></div>
+          <div class="speed-row"><label for="speedInput">Tốc độ</label><input id="speedInput" type="range" min="180" max="1000" step="20" value="480"><span id="speedLabel">0,48 giây/bước</span></div>
+          <p class="footnote">Mô hình gồm 27 cubies. Khi phát công thức, từng tầng sẽ xoay thật trong không gian 3D rồi mới cập nhật trạng thái màu.</p>
+        </div>
+      </section>
+      <section class="subsections">
+        <div class="panel subpanel"><h3>Ký hiệu Rubik thường gặp</h3><div class="notation-grid">
+          <div class="notation"><b>R L U D F B</b><span>Quay mặt phải, trái, trên, dưới, trước, sau 90°.</span></div>
+          <div class="notation"><b>′</b><span>Quay ngược chiều kim đồng hồ, nhìn trực diện mặt đó.</span></div>
+          <div class="notation"><b>2</b><span>Quay 180° (hai lần 90°).</span></div>
+          <div class="notation"><b>r l u d f b</b><span>Quay rộng: mặt ngoài cùng lớp giữa liền kề.</span></div>
+          <div class="notation"><b>M E S</b><span>Lớp giữa: M theo L, E theo D, S theo F.</span></div>
+          <div class="notation"><b>Ví dụ: R U R′</b><span>Phải thuận → trên thuận → phải ngược.</span></div>
+        </div></div>
+        <div class="panel subpanel"><h3>Cách sử dụng thư viện</h3><p class="recognition"><strong>1.</strong> Chọn OLL trong danh sách hoặc lọc theo nhóm để học từng dạng.<br><strong>2.</strong> Quan sát mặt trên và các cạnh bên trong mô hình 3D. Kéo khối để xem các phía.<br><strong>3.</strong> Bấm <strong>Phát công thức</strong> hoặc chọn từng ký hiệu để xem khối biến đổi theo từng bước.<br><strong>4.</strong> Đánh dấu đã thuộc. Tiến độ được lưu ngay trên trình duyệt của thiết bị.</p><p class="footnote">Lưu ý: OLL là bước định hướng toàn bộ mặt trên sau F2L. Sau OLL, vị trí các viên tầng cuối có thể chưa đúng; bước PLL sẽ hoán vị chúng.</p></div>
+      </section>
+    </main>
+  </div>
+  <footer class="footer">OLL 57 Trainer · Không liên kết với Rubik’s Cube hay WCA · Công thức tham khảo: <a href="https://puzzletip.com/oll-algorithms/" target="_blank" rel="noopener noreferrer">PuzzleTip — OLL algorithms</a> và <a href="https://speedsolving.com/wiki/index.php/OLL" target="_blank" rel="noopener noreferrer">Speedsolving Wiki</a>.</footer>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+'use strict';
+const CASES = [
+[1,'Runway','Dot','R U2 R2 F R F\' U2 R\' F R F\''],
+[2,'Zamboni','Dot','F R U R\' U\' F\' f R U R\' U\' f\''],
+[3,'Anti-mouse','Dot','f R U R\' U\' f\' U\' F R U R\' U\' F\''],
+[4,'Mouse','Dot','f R U R\' U\' f\' U F R U R\' U\' F\''],
+[5,'Lefty square','Square','r\' U2 R U R\' U r'],
+[6,'Righty square','Square','r U2 R\' U\' R U\' r\''],
+[7,'Lightning','Small lightning bolt','r U R\' U R U2 r\''],
+[8,'Reverse lightning','Small lightning bolt','l\' U\' L U\' L\' U2 l'],
+[9,'Kite','Fish','R U R\' U\' R\' F R2 U R\' U\' F\''],
+[10,'Anti-kite','Fish','R U R\' U R\' F R F\' R U2 R\''],
+[11,'Downstairs','Small lightning bolt','r U R\' U R\' F R F\' R U2 r\''],
+[12,'Upstairs','Small lightning bolt','r R2 U\' R U\' R\' U2 R U\' r\' R'],
+[13,'Gun','Knight move','F U R U\' R2 F\' R U R U\' R\''],
+[14,'Anti-gun','Knight move','R\' F R U R\' F\' R F U\' F\''],
+[15,'Squeegee','Knight move','r\' U\' r R\' U\' R U r\' U r'],
+[16,'Anti-squeegee','Knight move','r U r\' R U R\' U\' r U\' r\''],
+[17,'Slash','Dot','R U R\' U R\' F R F\' U2 R\' F R F\''],
+[18,'Crown','Dot','R U2 R2 F R F\' U2 M\' U R U\' r\''],
+[19,'Bunny','Dot','S\' R U R\' S U\' R\' F R F\''],
+[20,'Checkers','Dot','r U R\' U\' M2 U R U\' R\' U\' M\''],
+[21,'H','Cross','R U R\' U R U\' R\' U R U2 R\''],
+[22,'Pi','Cross','R U2 R2 U\' R2 U\' R2 U2 R'],
+[23,'Headlights','Cross','R2 D\' R U2 R\' D R U2 R'],
+[24,'Chameleon','Cross','r U R\' U\' r\' F R F\''],
+[25,'Bowtie','Cross','F\' r U R\' U\' r\' F R'],
+[26,'Antisune','Cross','R U2 R\' U\' R U\' R\''],
+[27,'Sune','Cross','R U R\' U R U2 R\''],
+[28,'Stealth','Corners oriented','r U R\' U\' r\' R U R U\' R\''],
+[29,'Spotted chameleon','Awkward','R U R\' U\' R U\' R\' F\' U\' F R U R\''],
+[30,'Anti-spotted chameleon','Awkward','F U R U2 R\' U\' R U2 R\' U\' F\''],
+[31,'Couch','P shape','R\' U\' F U R U\' R\' F\' R'],
+[32,'Anti-couch','P shape','S R U R\' U\' R\' F R f\''],
+[33,'Key','T shape','R U R\' U\' R\' F R F\''],
+[34,'City','C shape','R U R2 U\' R\' F R U R U\' F\''],
+[35,'Fish salad','Fish','R U2 R2 F R F\' R U2 R\''],
+[36,'Wario','W shape','L\' U\' L U\' L\' U L U L F\' L\' F'],
+[37,'Mounted fish','Fish','F R\' F\' R U R U\' R\''],
+[38,'Mario','W shape','R U R\' U R U\' R\' U\' R\' F R F\''],
+[39,'Fung','Big lightning bolt','L F\' L\' U\' L U F U\' L\''],
+[40,'Anti-fung','Big lightning bolt','R\' F R U R\' U\' F\' U R'],
+[41,'Awkward fish','Awkward','R U R\' U R U2 R\' F R U R\' U\' F\''],
+[42,'Lefty awkward fish','Awkward','R\' U\' R U\' R\' U2 R F R U R\' U\' F\''],
+[43,'Anti-P','P shape','R\' U\' F\' U F R'],
+[44,'P','P shape','f R U R\' U\' f\''],
+[45,'Suit up','T shape','F R U R\' U\' F\''],
+[46,"Seein' headlights",'C shape','R\' U\' R\' F R F\' U R'],
+[47,'Anti-breakneck','Small L shape','R\' U\' R\' F R F\' R\' F R F\' U R'],
+[48,'Breakneck','Small L shape','F R U R\' U\' R U R\' U\' F\''],
+[49,'Right back squeezy','Small L shape','r U\' r2 U r2 U r2 U\' r'],
+[50,'Right front squeezy','Small L shape','r\' U r2 U\' r2 U\' r2 U r\''],
+[51,'Bottlecap','I shape','F U R U\' R\' U R U\' R\' F\''],
+[52,'Rice cooker','I shape','R U R\' U R U\' B U\' B\' R\''],
+[53,'Frying pan','Small L shape','l\' U\' L U\' L\' U L U\' L\' U2 l'],
+[54,'Anti-frying pan','Small L shape','r U R\' U R U\' R\' U R U2 r\''],
+[55,'Highway','I shape','R\' F R U R U\' R2 F\' R2 U\' R\' U R U R\''],
+[56,'Streetlights','I shape','r U r\' U R U\' R\' U R U\' R\' r U\' r\''],
+[57,'Mummy','Corners oriented','R U R\' U\' M\' U R U\' r\'']
+].map(([id,name,group,alg])=>({id,name,group,alg,moves:alg.split(/\s+/)}));
+const GROUP_VI={Dot:'Chấm',Square:'Vuông', 'Small lightning bolt':'Tia chớp nhỏ',Fish:'Cá','Knight move':'Nước mã',Cross:'Dấu cộng hoàn chỉnh','Corners oriented':'Các góc đã định hướng',Awkward:'Dạng khó', 'P shape':'Dạng P','T shape':'Dạng T','C shape':'Dạng C','W shape':'Dạng W','Big lightning bolt':'Tia chớp lớn','Small L shape':'Dạng L nhỏ','I shape':'Dạng I'};
+const COLORS={U:'yellow',D:'white',F:'green',B:'blue',R:'red',L:'orange'};
+const FACES=['U','D','F','B','R','L'];
+let learned=new Set();try{learned=new Set(JSON.parse(localStorage.getItem('oll57-learned')||'[]').filter(n=>Number.isInteger(n)&&n>=1&&n<=57));}catch(e){}
+let selected=CASES[0],statusFilter='all',currentStickers=null,startStickers=null,step=0,playing=false,playTimer=null,rotX=-27,rotY=-35;
+const $=id=>document.getElementById(id);
+function showToast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>t.classList.remove('show'),1700)}
+function updateStats(){$('learnedCount').textContent=learned.size;$('learnBtn').textContent=learned.has(selected.id)?'✓ Đã thuộc · Bỏ đánh dấu':'✓ Đánh dấu đã thuộc';$('learnBtn').classList.toggle('good',!learned.has(selected.id));}
+function saveLearned(){try{localStorage.setItem('oll57-learned',JSON.stringify([...learned]));}catch(e){showToast('Trình duyệt đang chặn lưu tiến độ.');}updateStats();renderList();}
+function populateGroups(){const groups=[...new Set(CASES.map(c=>c.group))];for(const g of groups){const o=document.createElement('option');o.value=g;o.textContent=GROUP_VI[g]||g;$('groupFilter').appendChild(o)}}
+function renderList(){const q=$('searchInput').value.trim().toLowerCase(),g=$('groupFilter').value,sort=$('sortFilter').value;let rows=CASES.filter(c=>(g==='all'||c.group===g)&&(statusFilter==='all'||(statusFilter==='learned'?learned.has(c.id):!learned.has(c.id)))&&(!q||String(c.id).includes(q)||c.name.toLowerCase().includes(q)||c.group.toLowerCase().includes(q)||(GROUP_VI[c.group]||'').toLowerCase().includes(q)||c.alg.toLowerCase().includes(q)));if(sort==='reverse')rows.reverse();if(sort==='name')rows.sort((a,b)=>a.name.localeCompare(b.name));$('resultCount').textContent=`${rows.length} trường hợp`;$('caseList').innerHTML='';if(!rows.length){$('caseList').innerHTML='<div class="empty">Không tìm thấy trường hợp phù hợp.</div>';return;}for(const c of rows){const b=document.createElement('button');b.className='case-card'+(c.id===selected.id?' active':'');b.type='button';b.innerHTML=`<span class="case-num">${c.id}</span><span class="case-meta"><b>${c.name}</b><small>${GROUP_VI[c.group]||c.group}</small></span><span class="learn-dot ${learned.has(c.id)?'done':''}"></span>`;b.addEventListener('click',()=>selectCase(c.id));$('caseList').appendChild(b)}}
+function inverseToken(t){if(t.endsWith('2'))return t;return t.endsWith("'")?t.slice(0,-1):t+"'"}
+function inverseMoves(moves){return [...moves].reverse().map(inverseToken)}
+function baseMove(token){const m=token.match(/^([RLUDFBMESrludfb])([2']?)$/);if(!m)throw new Error('Ký hiệu không hợp lệ: '+token);const ch=m[1],suf=m[2];let axis,layers,q;
+switch(ch){case'R':axis=0;layers=[1];q=-1;break;case'L':axis=0;layers=[-1];q=1;break;case'U':axis=1;layers=[1];q=-1;break;case'D':axis=1;layers=[-1];q=1;break;case'F':axis=2;layers=[1];q=-1;break;case'B':axis=2;layers=[-1];q=1;break;case'M':axis=0;layers=[0];q=1;break;case'E':axis=1;layers=[0];q=1;break;case'S':axis=2;layers=[0];q=-1;break;case'r':axis=0;layers=[1,0];q=-1;break;case'l':axis=0;layers=[-1,0];q=1;break;case'u':axis=1;layers=[1,0];q=-1;break;case'd':axis=1;layers=[-1,0];q=1;break;case'f':axis=2;layers=[1,0];q=-1;break;case'b':axis=2;layers=[-1,0];q=1;break;}
+if(suf==="'")q=-q;else if(suf==='2')q*=2;return{axis,layers,q};}
+function turnVec(v,axis,q){let out=[...v],n=((q%4)+4)%4;for(let i=0;i<n;i++){const [x,y,z]=out;if(axis===0)out=[x,-z,y];else if(axis===1)out=[z,y,-x];else out=[-y,x,z];}return out;}
+function faceletToSticker(face,index,color){const row=Math.floor(index/3),col=index%3;let p,n;switch(face){case'U':p=[col-1,1,row-1];n=[0,1,0];break;case'D':p=[col-1,-1,1-row];n=[0,-1,0];break;case'F':p=[col-1,1-row,1];n=[0,0,1];break;case'B':p=[1-col,1-row,-1];n=[0,0,-1];break;case'R':p=[1,1-row,1-col];n=[1,0,0];break;case'L':p=[-1,1-row,col-1];n=[-1,0,0];break;}return{p,n,color};}
+function solvedStickers(){const a=[];for(const f of FACES)for(let i=0;i<9;i++)a.push(faceletToSticker(f,i,COLORS[f]));return a;}
+function applyMove(stickers,token){const {axis,layers,q}=baseMove(token);return stickers.map(s=>{if(!layers.includes(s.p[axis]))return s;return{p:turnVec(s.p,axis,q),n:turnVec(s.n,axis,q),color:s.color};});}
+function inverseApplyAlgorithm(c){let s=solvedStickers();for(const t of inverseMoves(c.moves))s=applyMove(s,t);return s;}
+function stickerPosition(s){const [x,y,z]=s.p,[nx,ny,nz]=s.n;let f,r,col;if(ny===1){f='U';r=z+1;col=x+1;}else if(ny===-1){f='D';r=1-z;col=x+1;}else if(nz===1){f='F';r=1-y;col=x+1;}else if(nz===-1){f='B';r=1-y;col=1-x;}else if(nx===1){f='R';r=1-y;col=1-z;}else{f='L';r=1-y;col=z+1;}return[f,r*3+col];}
+const CUBIE_FACES = [
+  {key:'0,0,1',face:'front'}, {key:'0,0,-1',face:'back'},
+  {key:'1,0,0',face:'right'}, {key:'-1,0,0',face:'left'},
+  {key:'0,1,0',face:'top'}, {key:'0,-1,0',face:'bottom'}
+];
+function renderCube(animatedMove=null){
+  const layersHost=$('cubeLayers');
+  const stickerMap=new Map();
+  for(const s of currentStickers){
+    stickerMap.set(`${s.p.join(',')}|${s.n.join(',')}`,s.color);
+  }
+  let moveInfo=null;
+  if(animatedMove) moveInfo=baseMove(animatedMove);
+  const staticCubies=[],movingCubies=[];
+  for(let x=-1;x<=1;x++) for(let y=-1;y<=1;y++) for(let z=-1;z<=1;z++){
+    const pos=[x,y,z];
+    const target=moveInfo && moveInfo.layers.includes(pos[moveInfo.axis]) ? movingCubies : staticCubies;
+    const faces=CUBIE_FACES.map(({key,face})=>{
+      const color=stickerMap.get(`${pos.join(',')}|${key}`)||'black';
+      return `<div class="cubie-face ${face}"><span class="sticker ${color}"></span></div>`;
+    }).join('');
+    target.push(`<div class="cubie" style="transform:translate3d(${x*72}px,${-y*72}px,${z*72}px)">${faces}</div>`);
+  }
+  const staticLayer=staticCubies.length?`<div class="cube-layer static-layer">${staticCubies.join('')}</div>`:'';
+  const movingLayer=movingCubies.length?`<div class="cube-layer turning">${movingCubies.join('')}</div>`:'';
+  layersHost.innerHTML=staticLayer+movingLayer;
+}
+// Zoom kiểu camera: giữ nguyên kích thước 27 cubie, chỉ dịch camera ảo
+// dọc theo trục nhìn. Không scale từng chiều hay thay đổi kích thước sticker.
+const CAMERA_PERSPECTIVE=1500;
+let cubeZoom=1;
+function setCubeAngle(){
+  const scene=$('cubeScene');
+  const cameraZ=CAMERA_PERSPECTIVE*(1-1/cubeZoom);
+  scene.style.transition=dragging?'none':'transform .30s cubic-bezier(.2,.75,.2,1)';
+  scene.style.transform=`translateZ(${cameraZ.toFixed(2)}px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+}
+function getMaxCubeZoom(){
+  const stage=$('cubeStage');
+  const fitWidth=Math.max(.6,(stage.clientWidth-40)/270);
+  const fitHeight=Math.max(.6,(stage.clientHeight-40)/270);
+  return Math.max(1.05,Math.min(2.35,fitWidth,fitHeight));
+}
+function setCubeZoom(value){
+  cubeZoom=Math.max(.6,Math.min(getMaxCubeZoom(),value));
+  setCubeAngle();
+  $('cubeWrap').title=`Kéo để xoay · Cuộn để zoom (${Math.round(cubeZoom*100)}%)`;
+  $('cubeWrap').setAttribute('aria-label',`Mô hình Rubik 3D, zoom ${Math.round(cubeZoom*100)} phần trăm; kéo để xoay, cuộn để zoom`);
+}
+function renderAlgorithm(){const el=$('algorithm');el.innerHTML='';selected.moves.forEach((m,i)=>{const span=document.createElement('span');span.className='move-chip'+(i===step-1?' current':'');span.textContent=m;span.title=`Nhảy đến sau bước ${i+1}`;span.addEventListener('click',()=>jumpTo(i+1));el.appendChild(span);});$('moveCount').textContent=`${selected.moves.length} bước`;$('stepLabel').textContent=`Bước ${step} / ${selected.moves.length}`;$('stepPercent').textContent=`${Math.round(step/selected.moves.length*100)}%`;$('progressFill').style.width=`${step/selected.moves.length*100}%`;$('prevBtn').disabled=step===0;$('nextBtn').disabled=step===selected.moves.length;$('playBtn').textContent=playing?'Ⅱ Tạm dừng':(step===selected.moves.length?'↻ Phát lại':'▶ Phát công thức');$('cubeStateLabel').textContent=step===0?'Trạng thái: OLL ban đầu':step===selected.moves.length?'Trạng thái: đã hoàn thành OLL':`Trạng thái: sau ${step} bước`;}
+function renderDetail(){ $('caseGroup').textContent=`${selected.group.toUpperCase()} · ${GROUP_VI[selected.group]||selected.group}`;$('caseTitle').textContent=`OLL ${selected.id} — ${selected.name}`;$('caseDescription').textContent=`Nhóm ${GROUP_VI[selected.group]||selected.group}. Thực hiện ${selected.moves.length} bước để định hướng toàn bộ mặt trên.`;updateStats();}
+let moveAnimating=false,activeAnimationCancel=null;
+function stopPlay(){if(playTimer){clearTimeout(playTimer);playTimer=null;}playing=false;}
+function cancelActiveTurn(){if(activeAnimationCancel)activeAnimationCancel();}
+function moveCssTransform(info){
+  const degrees=info.q*90;
+  if(info.axis===0)return `rotateX(${-degrees}deg)`;
+  if(info.axis===1)return `rotateY(${degrees}deg)`;
+  return `rotateZ(${-degrees}deg)`;
+}
+function animateLayerTurn(token,duration=Number($('speedInput').value)){
+  if(moveAnimating)return Promise.resolve(false);
+  return new Promise(resolve=>{
+    const info=baseMove(token);
+    moveAnimating=true;
+    renderCube(token);
+    const turning=$('cubeLayers').querySelector('.turning');
+    if(!turning){moveAnimating=false;resolve(false);return;}
+    let finished=false;
+    let fallbackTimer=null;
+    const finish=(commit)=>{
+      if(finished)return;
+      finished=true;
+      if(fallbackTimer)clearTimeout(fallbackTimer);
+      turning.removeEventListener('transitionend',onTransitionEnd);
+      if(commit)currentStickers=applyMove(currentStickers,token);
+      activeAnimationCancel=null;
+      moveAnimating=false;
+      if(commit)renderCube();
+      resolve(commit);
+    };
+    const onTransitionEnd=e=>{
+      if(e.target===turning && e.propertyName==='transform')finish(true);
+    };
+    activeAnimationCancel=()=>finish(false);
+    turning.style.transition='none';
+    turning.style.transform='none';
+    void turning.offsetWidth;
+    turning.addEventListener('transitionend',onTransitionEnd);
+    const ms=Math.max(140,Number(duration)||480);
+    requestAnimationFrame(()=>{
+      if(finished)return;
+      turning.style.transition=`transform ${ms}ms cubic-bezier(.22,.76,.25,1)`;
+      turning.style.transform=moveCssTransform(info);
+    });
+    fallbackTimer=setTimeout(()=>finish(true),ms+120);
+  });
+}
+async function jumpTo(n){
+  stopPlay();cancelActiveTurn();
+  step=Math.max(0,Math.min(selected.moves.length,n));
+  currentStickers=inverseApplyAlgorithm(selected);
+  for(let i=0;i<step;i++)currentStickers=applyMove(currentStickers,selected.moves[i]);
+  renderCube();renderAlgorithm();
+}
+async function nextStep(){
+  if(moveAnimating)return;
+  if(step>=selected.moves.length){stopPlay();renderAlgorithm();return;}
+  const token=selected.moves[step];
+  const done=await animateLayerTurn(token);
+  if(!done)return;
+  step++;renderAlgorithm();
+  if(step===selected.moves.length){stopPlay();renderAlgorithm();}
+}
+async function previousStep(){
+  if(moveAnimating||step<=0)return;
+  const token=inverseToken(selected.moves[step-1]);
+  const done=await animateLayerTurn(token);
+  if(!done)return;
+  step--;renderAlgorithm();
+}
+async function playNextMove(){
+  if(!playing||moveAnimating)return;
+  if(step>=selected.moves.length){stopPlay();renderAlgorithm();return;}
+  const token=selected.moves[step];
+  const done=await animateLayerTurn(token,Number($('speedInput').value));
+  if(!done||!playing)return;
+  step++;renderAlgorithm();
+  if(!playing)return;
+  if(step>=selected.moves.length){stopPlay();renderAlgorithm();return;}
+  playTimer=setTimeout(playNextMove,55);
+}
+function togglePlay(){
+  if(playing){stopPlay();renderAlgorithm();return;}
+  if(moveAnimating)return;
+  if(step===selected.moves.length)jumpTo(0);
+  playing=true;renderAlgorithm();playNextMove();
+}
+function selectCase(id){
+  stopPlay();cancelActiveTurn();
+  selected=CASES.find(c=>c.id===id)||CASES[0];step=0;
+  startStickers=inverseApplyAlgorithm(selected);
+  currentStickers=startStickers.map(s=>({p:[...s.p],n:[...s.n],color:s.color}));
+  renderDetail();renderCube();renderAlgorithm();renderList();
+}
+function setStatus(s){statusFilter=s;document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.status===s));renderList();}
+function markLearned(){if(learned.has(selected.id))learned.delete(selected.id);else learned.add(selected.id);saveLearned();showToast(learned.has(selected.id)?`Đã lưu OLL ${selected.id} là đã thuộc.`:`Đã bỏ đánh dấu OLL ${selected.id}.`);}
+async function copyAlgorithm(){try{await navigator.clipboard.writeText(selected.alg);showToast('Đã sao chép công thức.');}catch(e){const ta=document.createElement('textarea');ta.value=selected.alg;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');showToast('Đã sao chép công thức.');}catch(err){showToast('Không thể sao chép tự động.');}ta.remove();}}
+function randomCase(){let pool=CASES.filter(c=>statusFilter==='all'||(statusFilter==='learned'?learned.has(c.id):!learned.has(c.id)));if($('groupFilter').value!=='all')pool=pool.filter(c=>c.group===$('groupFilter').value);if(!pool.length)pool=CASES;let pick=pool[Math.floor(Math.random()*pool.length)];if(pool.length>1&&pick.id===selected.id)pick=pool[(pool.findIndex(c=>c.id===pick.id)+1)%pool.length];selectCase(pick.id);}
+// 3D drag: transform only a single lightweight cube container.
+let dragging=false,lastX=0,lastY=0;
+$('cubeWrap').addEventListener('wheel',e=>{
+  e.preventDefault();
+  const factor=Math.exp(-e.deltaY*.0012);
+  setCubeZoom(cubeZoom*factor);
+},{passive:false});
+$('cubeWrap').addEventListener('pointerdown',e=>{dragging=true;lastX=e.clientX;lastY=e.clientY;$('cubeWrap').setPointerCapture(e.pointerId);});
+$('cubeWrap').addEventListener('pointermove',e=>{if(!dragging)return;const dx=e.clientX-lastX,dy=e.clientY-lastY;lastX=e.clientX;lastY=e.clientY;rotY+=dx*.65;rotX=Math.max(-100,Math.min(55,rotX-dy*.55));setCubeAngle();});
+$('cubeWrap').addEventListener('pointerup',()=>dragging=false);$('cubeWrap').addEventListener('pointercancel',()=>dragging=false);$('cubeWrap').addEventListener('lostpointercapture',()=>dragging=false);
+$('topViewBtn').addEventListener('click',()=>{rotX=-87;rotY=-35;setCubeAngle();});$('defaultViewBtn').addEventListener('click',()=>{rotX=-27;rotY=-35;setCubeAngle();});$('rotateViewBtn').addEventListener('click',()=>{rotY+=45;setCubeAngle();});
+function toggleExpandedView(force){const panel=document.querySelector('.cube-panel');const open=typeof force==='boolean'?force:!panel.classList.contains('viewer-expanded');panel.classList.toggle('viewer-expanded',open);document.body.classList.toggle('viewer-open',open);$('expandViewBtn').textContent=open?'✕ Thu nhỏ khung nhìn':'⛶ Mở rộng khung nhìn';$('expandViewBtn').setAttribute('aria-pressed',String(open));requestAnimationFrame(()=>{if(cubeZoom>getMaxCubeZoom())setCubeZoom(getMaxCubeZoom());});}
+$('expandViewBtn').addEventListener('click',()=>toggleExpandedView());window.addEventListener('resize',()=>{if(cubeZoom>getMaxCubeZoom())setCubeZoom(getMaxCubeZoom());});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.querySelector('.cube-panel').classList.contains('viewer-expanded'))toggleExpandedView(false);});
+$('searchInput').addEventListener('input',renderList);$('groupFilter').addEventListener('change',renderList);$('sortFilter').addEventListener('change',renderList);document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>setStatus(b.dataset.status)));
+$('learnBtn').addEventListener('click',markLearned);$('randomBtn').addEventListener('click',randomCase);$('copyBtn').addEventListener('click',copyAlgorithm);$('resetBtn').addEventListener('click',()=>jumpTo(0));$('prevBtn').addEventListener('click',previousStep);$('nextBtn').addEventListener('click',nextStep);$('playBtn').addEventListener('click',togglePlay);
+$('speedInput').addEventListener('input',()=>{$('speedLabel').textContent=(Number($('speedInput').value)/1000).toLocaleString('vi-VN',{minimumFractionDigits:2,maximumFractionDigits:2})+' giây/bước';if(playing){stopPlay();cancelActiveTurn();togglePlay();}});
+document.addEventListener('keydown',e=>{if(e.target.matches('input,select,textarea'))return;if(e.key==='ArrowRight')nextStep();if(e.key==='ArrowLeft')previousStep();if(e.key===' '){e.preventDefault();togglePlay();}});
+populateGroups();$('speedLabel').textContent='0,48 giây/bước';selectCase(1);setCubeAngle();
+</script>
+</body>
+</html>
